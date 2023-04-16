@@ -42,11 +42,14 @@ h2{
     
     
 }
-
+ .post_title{
+    margin-bottom: 2rem;
+    font-size:2vw;
+ }
 
 .down_shoe{
     width: 100%;
-    max-width: 100px;
+    max-width: 8%;
     height: auto;
     position:relative;
     transform: rotate(20deg);
@@ -55,7 +58,7 @@ h2{
 
 .up_shoe{
     width: 100%;
-    max-width: 100px;
+    max-width: 8%;
     height: auto;
     position:relative;
     transform: rotate(-20deg);
