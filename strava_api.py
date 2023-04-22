@@ -12,6 +12,9 @@ import polyline
 import base64
 from tqdm import tqdm
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -20,10 +23,13 @@ activites_url = "https://www.strava.com/api/v3/athlete/activities"
 
 def get_access_token():
     auth_url = "https://www.strava.com/oauth/token"
+    client_id=os.environ.get('CLIENT_ID')
+    client_secret=os.environ.get('CLIENT_SECRET')
+    refresh_token=os.environ.get('REFRESH_TOKEN')
     payload = {
-        'client_id': "105510",
-        'client_secret': 'f62aa8c820a2c947fdc16b5c89ed357f9360e8c0',
-        'refresh_token': '61879cc0767f0188e1ffdbd8306d0cacdf7d4cbc',
+        'client_id': client_id,
+        'client_secret': client_secret,
+        'refresh_token': refresh_token,
         'grant_type': "refresh_token",
         'f': 'json'
     }
