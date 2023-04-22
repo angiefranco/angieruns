@@ -23,13 +23,15 @@ activites_url = "https://www.strava.com/api/v3/athlete/activities"
 
 def get_access_token():
     auth_url = "https://www.strava.com/oauth/token"
-    client_id=os.environ.get('CLIENT_ID')
-    client_secret=os.environ.get('CLIENT_SECRET')
-    refresh_token=os.environ.get('REFRESH_TOKEN')
+    CLIENT_ID=os.environ.get('CLIENT_ID')
+    CLIENT_SECRET=os.environ.get('CLIENT_SECRET')
+    REFRESH_TOKEN=os.environ.get('REFRESH_TOKEN')
+    print("got the tokens from env file\n\n\n\n")
+    print(CLIENT_ID)
     payload = {
-        'client_id': client_id,
-        'client_secret': client_secret,
-        'refresh_token': refresh_token,
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET,
+        'refresh_token': REFRESH_TOKEN,
         'grant_type': "refresh_token",
         'f': 'json'
     }
