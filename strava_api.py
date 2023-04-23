@@ -26,8 +26,6 @@ def get_access_token():
     CLIENT_ID=os.environ.get('CLIENT_ID')
     CLIENT_SECRET=os.environ.get('CLIENT_SECRET')
     REFRESH_TOKEN=os.environ.get('REFRESH_TOKEN')
-    print("got the tokens from env file\n\n\n\n")
-    print(CLIENT_ID)
     payload = {
         'client_id': CLIENT_ID,
         'client_secret': CLIENT_SECRET,

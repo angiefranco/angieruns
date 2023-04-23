@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 with open("strava_api.py") as strava:
     exec(strava.read())
-print(distance, pace, time)
+
 
 @app.route("/")
 def angieruns():
