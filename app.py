@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 import math
 import pandas as pd
@@ -13,6 +13,7 @@ import os
 import re
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+import subprocess
 load_dotenv()
 
 
@@ -20,9 +21,15 @@ app = Flask(__name__)
 #app.config['SERVER_NAME'] = 'yourcustomdomain.com'
 
 
+@app.route("/deploy", methods=['POST'])
+def deploy():
+    if request.method == 'POST':
+        subprocess.call(['/home/ec2-user/deploy.sh'])
+        return 'Deployment Successful!'
+
+
 with open("strava_api.py") as strava:
     exec(strava.read())
-
 
 @app.route("/")
 def angieruns():
