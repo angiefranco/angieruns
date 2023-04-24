@@ -13,6 +13,7 @@ import base64
 from tqdm import tqdm
 import os
 from dotenv import load_dotenv
+from datetime import datetime
 load_dotenv()
 
 
@@ -82,10 +83,17 @@ def get_elevation(latitude, longitude):
     r = requests.get(base_url, params=payload).json()['results'][0]
     return r['elevation']
 
+def get_date(my_dataset):
+    mydate=my_dataset[0]['start_date']
+    date_obj = datetime.strptime(mydate, "%Y-%m-%dT%H:%M:%SZ")
+    formatted_date = date_obj.strftime("%B %d, %Y")
+    return formatted_date
 
 access_token=get_access_token()
 my_dataset=get_my_dataset(access_token)
 distance, pace, time=get_data(my_dataset)
+date=get_date(my_dataset)
+
 # activity=get_map(my_dataset)
 
 # get elevation data
