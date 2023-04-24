@@ -17,6 +17,8 @@ load_dotenv()
 
 
 app = Flask(__name__)
+#app.config['SERVER_NAME'] = 'yourcustomdomain.com'
+
 
 with open("strava_api.py") as strava:
     exec(strava.read())
