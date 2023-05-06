@@ -92,7 +92,7 @@ def get_date(my_dataset):
 access_token=get_access_token()
 my_dataset=get_my_dataset(access_token)
 distance, pace, time=get_data(my_dataset)
-date=get_date(my_dataset)
+
 
 # activity=get_map(my_dataset)
 
