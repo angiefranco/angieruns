@@ -46,7 +46,7 @@ def angieruns():
 
     return render_template('home.html', distance=distance, pace=pace, time=time, date=date, progress=progress, goal=goal, progress_percentage=progress_percentage, progress_message=progress_message)
 
-@app.route("/blog")
+#@app.route("/blog")
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', debug=True)
