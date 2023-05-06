@@ -41,20 +41,20 @@ def get_access_token():
 
 def get_my_dataset(access_token):
     header = {'Authorization': 'Bearer ' + access_token}
-    param = {'per_page': 1, 'page': 1}
+    param = {'per_page': 200, 'page': 1}
     my_dataset = requests.get(activites_url, headers=header, params=param).json()
     return my_dataset
 
-def get_data(my_dataset):
+def get_data(my_dataset, last_run):
     #distance in mi
     factor=1609
-    distance=float((my_dataset[0]["distance"])/factor)
+    distance=float((my_dataset[last_run]["distance"])/factor)
     distance=round(distance,2)
     distance=str(distance)+ " mi"
 
     #pace in mins per mile
-    tot_seconds=my_dataset[0]["moving_time"]
-    tot_distance=my_dataset[0]["distance"]
+    tot_seconds=my_dataset[last_run]["moving_time"]
+    tot_distance=my_dataset[last_run]["distance"]
     seconds_per_mile=(tot_seconds/tot_distance)*1000*1.609
     pace_mins, pace_secs = divmod(seconds_per_mile,60)
     pace_mins=math.trunc(pace_mins)
@@ -91,7 +91,15 @@ def get_date(my_dataset):
 
 access_token=get_access_token()
 my_dataset=get_my_dataset(access_token)
-distance, pace, time=get_data(my_dataset)
+
+for index,workout in enumerate(my_dataset):
+    if workout['sport_type'] == 'Run':
+        last_run=index
+        distance, pace, time=get_data(my_dataset, last_run)
+        print(distance,pace,time)
+        break
+    
+
 
 
 # activity=get_map(my_dataset)
