@@ -91,6 +91,7 @@ def get_date(my_dataset):
 
 access_token=get_access_token()
 my_dataset=get_my_dataset(access_token)
+date=get_date(my_dataset)
 
 for index,workout in enumerate(my_dataset):
     if workout['sport_type'] == 'Run':
