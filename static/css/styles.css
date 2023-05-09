@@ -16,7 +16,7 @@ body {
   }
   
   .jumbotron {
-    padding: 150px;
+    padding: 75px;
     background: url("/static/images/skyline.png");
     background-size:cover;
     box-shadow: inset 0 0 0 2000px rgba(255, 255, 255, 0.9);
