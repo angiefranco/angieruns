@@ -71,32 +71,21 @@ def get_data(my_dataset, last_run):
     time= str(math.trunc(tot_mins)) + "m " + str(math.trunc(tot_secs)) + "s"
     return distance,pace, time
 
-def get_map(my_dataset):
-    activity=pd.json_normalize(my_dataset)
-    activity['map.polyline']=activity['map.summary_polyline'].apply(polyline.decode)
-    return activity
 
-# define function to get elevation data using the open-elevation API
-def get_elevation(latitude, longitude):
-    base_url = "https://api.open-elevation.com/api/v1/lookup"
-    payload = {'locations': f'{latitude},{longitude}'}
-    r = requests.get(base_url, params=payload).json()['results'][0]
-    return r['elevation']
-
-def get_date(my_dataset):
-    mydate=my_dataset[0]['start_date']
+def get_date(my_dataset, last_run):
+    mydate=my_dataset[last_run]['start_date']
     date_obj = datetime.strptime(mydate, "%Y-%m-%dT%H:%M:%SZ")
     formatted_date = date_obj.strftime("%B %d, %Y")
     return formatted_date
 
 access_token=get_access_token()
 my_dataset=get_my_dataset(access_token)
-date=get_date(my_dataset)
 
 for index,workout in enumerate(my_dataset):
     if workout['sport_type'] == 'Run':
         last_run=index
         distance, pace, time=get_data(my_dataset, last_run)
+        date=get_date(my_dataset,last_run)
         print(distance,pace,time)
         break
     
