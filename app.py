@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import requests
 import math
 import pandas as pd
@@ -19,9 +19,13 @@ load_dotenv()
 
 
 app = Flask(__name__)
-#app.config['SERVER_NAME'] = 'yourcustomdomain.com'
 
 
+@app.before_request
+def redirect_https():
+    if not request.is_secure:
+        return redirect(request.url.replace('http://', 'https://'), code=301)
+    
 @app.route("/deploy", methods=['POST'])
 def deploy():
     if request.method == 'POST':
