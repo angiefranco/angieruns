@@ -21,10 +21,10 @@ load_dotenv()
 app = Flask(__name__)
 
 
-@app.before_request
-def redirect_https():
-    if not request.is_secure:
-        return redirect(request.url.replace('http://', 'https://'), code=301)
+# @app.before_request
+# def redirect_https():
+#     if not request.is_secure:
+#         return redirect(request.url.replace('http://', 'https://'), code=301)
     
 @app.route("/deploy", methods=['POST'])
 def deploy():
