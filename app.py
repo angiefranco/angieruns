@@ -20,17 +20,12 @@ load_dotenv()
 
 app = Flask(__name__)
 
-
-# @app.before_request
-# def redirect_https():
-#     if not request.is_secure:
-#         return redirect(request.url.replace('http://', 'https://'), code=301)
     
 @app.route("/deploy", methods=['POST'])
 def deploy():
     if request.method == 'POST':
         subprocess.call(['/home/ec2-user/deploy.sh'])
-        return 'Deployment Successful!'
+        print('Deployment Successful!')
 
 
 with open("strava_api.py") as strava:
@@ -50,7 +45,6 @@ def angieruns():
 
     return render_template('home.html', distance=distance, pace=pace, time=time, date=date, progress=progress, goal=goal, progress_percentage=progress_percentage, progress_message=progress_message)
 
-#@app.route("/blog")
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', debug=True)
