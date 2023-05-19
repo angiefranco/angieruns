@@ -25,7 +25,7 @@ app = Flask(__name__)
 def deploy():
     if request.method == 'POST':
         subprocess.call(['/home/ec2-user/deploy.sh'])
-        print('Deployment Successful!')
+        return 'Deployment Successful!'
 
 
 with open("strava_api.py") as strava:
