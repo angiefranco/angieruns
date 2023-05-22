@@ -90,6 +90,12 @@ body {
   
   .col .h2 {
     margin-bottom: 40px; 
+    text-align: center;
+  }
+
+  .row .h2{
+    margin-bottom: 40px;
+    text-align: center;
   }
   .progress {
     height: 40px;
