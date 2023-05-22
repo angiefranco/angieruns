@@ -13,7 +13,7 @@ import base64
 from tqdm import tqdm
 import os
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, timedelta
 load_dotenv()
 
 
@@ -45,77 +45,23 @@ def get_my_dataset(access_token):
     my_dataset = requests.get(activites_url, headers=header, params=param).json()
     return my_dataset
 
-def get_data(my_dataset, last_run):
-    #distance in mi
-    factor=1609
-    distance=float((my_dataset[last_run]["distance"])/factor)
-    distance=round(distance,2)
-    distance=str(distance)+ " mi"
-
-    #pace in mins per mile
-    tot_seconds=my_dataset[last_run]["moving_time"]
-    tot_distance=my_dataset[last_run]["distance"]
-    seconds_per_mile=(tot_seconds/tot_distance)*1000*1.609
-    pace_mins, pace_secs = divmod(seconds_per_mile,60)
-    pace_mins=math.trunc(pace_mins)
-    pace_secs=math.trunc(round(pace_secs,0))
-    pace = str(pace_mins) + ":" + str(pace_secs) + " /mi"
- 
-    #total run time
-    tot_mins, tot_secs = divmod(tot_seconds,60)
-    if tot_mins > 60:
-        tot_hours, tot_mins = divmod(tot_mins,60)
-        time=str(math.trunc(tot_hours)) + "h " + str(math.trunc(tot_mins)) + "s"
-        return distance, pace, time
-    
-    time= str(math.trunc(tot_mins)) + "m " + str(math.trunc(tot_secs)) + "s"
-    return distance,pace, time
 
 
-def get_date(my_dataset, last_run):
-    mydate=my_dataset[last_run]['start_date']
-    date_obj = datetime.strptime(mydate, "%Y-%m-%dT%H:%M:%SZ")
-    formatted_date = date_obj.strftime("%B %d, %Y")
-    return formatted_date
+# determine if it has been more than a day since the strava data was loaded
+current_date=datetime.now()
+a_day_ago=current_date - timedelta(hours=24)
+last_modified_time = os.path.getmtime('strava_data.txt')
+last_modified_datetime = datetime.fromtimestamp(last_modified_time)
 
-access_token=get_access_token()
-my_dataset=get_my_dataset(access_token)
+if last_modified_datetime < a_day_ago:
+    print("in if")
+    access_token=get_access_token()
+    my_dataset=get_my_dataset(access_token)
+    my_dataset_json=json.dumps(my_dataset)
+    with open('strava_data.txt','w') as file:
+        file.write(my_dataset_json)
+        print("wrote new data")
 
-for index,workout in enumerate(my_dataset):
-    if workout['sport_type'] == 'Run':
-        last_run=index
-        distance, pace, time=get_data(my_dataset, last_run)
-        date=get_date(my_dataset,last_run)
-        print(distance,pace,time)
-        break
     
 
-
-
-# activity=get_map(my_dataset)
-
-# get elevation data
-# elevation_data = list()
-#elevation = [get_elevation(coord[0], coord[1]) for coord in activity['map.polyline']]
-#elevation_data.append(elevation)
-
-# elevation=get_elevation(40.75922, -73.99844)
-# print("elevation success")
-# print("\n\n")
-# print(elevation)
-
-# add elevation data to dataframe
-# activity['map.elevation'] = elevation_data
-
-# my_ride = activity.iloc[0, :] 
-# # plot ride on map
-# centroid = [
-#     np.mean([coord[0] for coord in my_ride['map.polyline'][0]]), 
-#     np.mean([coord[1] for coord in my_ride['map.polyline'][0]])
-# ]
-# m = folium.Map(location=centroid, zoom_start=10)
-# folium.PolyLine(my_ride['map.polyline'], color='red').add_to(m)
-# map_html = m._repr_html_()
-# print(map_html)
-
-
+    

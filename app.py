@@ -30,6 +30,8 @@ def deploy():
 
 with open("strava_api.py") as strava:
     exec(strava.read())
+    with open("get_run_data.py") as run_data:
+        exec(run_data.read())
 
 @app.route("/")
 def angieruns():
