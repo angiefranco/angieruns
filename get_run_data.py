@@ -48,5 +48,4 @@ for index,workout in enumerate(my_dataset):
         last_run=index
         distance, pace, time=get_data(my_dataset, last_run)
         date=get_date(my_dataset,last_run)
-        print(distance,pace,time)
         break
