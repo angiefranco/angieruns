@@ -24,7 +24,7 @@ app = Flask(__name__)
 @app.route("/deploy", methods=['POST'])
 def deploy():
     if request.method == 'POST':
-        subprocess.call(['/home/ec2-user/deploy.sh'])
+        subprocess.call(['sudo','/home/ec2-user/deploy.sh'])
         return 'Deployment Successful!'
 
 
