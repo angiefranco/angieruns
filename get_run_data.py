@@ -34,7 +34,13 @@ def get_data(my_dataset, last_run):
         return distance, pace, time
     
     time= str(math.trunc(tot_mins)) + "m " + str(math.trunc(tot_secs)) + "s"
-    return distance,pace, time
+    
+    # #get date
+    # mydate=my_dataset[last_run]['start_date']
+    # date_obj = datetime.strptime(mydate, "%Y-%m-%dT%H:%M:%SZ")
+    # formatted_date = date_obj.strftime("%B %d, %Y")
+    
+    return distance,pace,time
 
 
 def get_date(my_dataset, last_run):
@@ -43,9 +49,17 @@ def get_date(my_dataset, last_run):
     formatted_date = date_obj.strftime("%B %d, %Y")
     return formatted_date
 
+stats_dic={}
 for index,workout in enumerate(my_dataset):
     if workout['sport_type'] == 'Run':
         last_run=index
         distance, pace, time=get_data(my_dataset, last_run)
         date=get_date(my_dataset,last_run)
-        break
+        di="distance"+str(index)
+        p="pace"+str(index)
+        t="time"+str(index)
+        dt="date"+str(index)
+        stats_dic[di]=distance
+        stats_dic[p]=pace
+        stats_dic[t]=time
+        stats_dic[dt]=date

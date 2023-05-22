@@ -45,7 +45,7 @@ def angieruns():
     goal = 3500
     progress_percentage = progress / goal * 100
 
-    return render_template('home.html', distance=distance, pace=pace, time=time, date=date, progress=progress, goal=goal, progress_percentage=progress_percentage, progress_message=progress_message)
+    return render_template('home.html', **stats_dic, progress=progress, goal=goal, progress_percentage=progress_percentage, progress_message=progress_message)
 
 
 if __name__=='__main__':
