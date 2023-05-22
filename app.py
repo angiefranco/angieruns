@@ -51,8 +51,8 @@ def angieruns():
 def blog():
     return render_template('blog.html')
 
-app.route("/rbc_brooklyn_half")
-def post():
+app.route("/rbc")
+def rbc():
     return render_template('rbc_brooklyn_half.html')
 
 if __name__=='__main__':
