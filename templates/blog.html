@@ -28,9 +28,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="https://hope.drugfree.org/endurance-teams/angieruns" target="_blank">Donate</a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="{{url_for('blog')}}" target="_blank">Running Blog</a>
-                    </li>
                 </ul>
             </div>
         </nav>
@@ -52,7 +49,7 @@
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
                     <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="{{url_for('static', filename='rbc_brooklyn_half.png')}}" alt="Angie holding her medal after finishing the race" /></a>
+                        <a href="#!"><img class="card-img-top" src="{{ url_for('static', filename='rbc_brooklyn_half.png') }}" alt="Angie holding her medal after finishing the race" /></a>
                         <div class="card-body">
                             <div class="small text-muted">May 22, 2023</div>
                             <h2 class="card-title">I ran the RBC Brooklyn Half Marathon</h2>
