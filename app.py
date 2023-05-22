@@ -47,6 +47,13 @@ def angieruns():
 
     return render_template('home.html', **stats_dic, progress=progress, goal=goal, progress_percentage=progress_percentage, progress_message=progress_message)
 
+@app.route("/blog")
+def blog():
+    return render_template('blog.html')
+
+app.route("/rbc_brooklyn_half")
+def post():
+    return render_template('rbc_brooklyn_half.html')
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', debug=True)
