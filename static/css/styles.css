@@ -67,6 +67,11 @@ body {
   img {
     max-width: 100%;
   }
+
+  img .post{
+    width: 850px;
+    height:auto;
+  }
   
   .col-md-8 {
     margin-bottom: 30px;
