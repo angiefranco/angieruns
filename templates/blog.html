@@ -7,26 +7,24 @@
     <title>Run with Angie Blog</title>
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous"><link/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#655DBB;">
-            <a class="navbar-brand" style="padding-left:10px;" href="#">run with angie</a>
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
+        <nav class="navbar navbar-dark navbar-expand-md fixed-top" style="background-color:#655DBB;">
+            <a href="http://runwithangie.com" class="navbar-brand">run with angie</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+            <div class="navbar-collapse collapse" id="navbar">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="https://hope.drugfree.org/endurance-teams/angieruns" target="_blank">Donate</a>
+                        <a href="https://hope.drugfree.org/endurance-teams/angieruns" target="_blank" class="nav-link">Donate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('blog') }}" target="_blank" class="nav-link">Running Blog</a>
                     </li>
                 </ul>
             </div>
@@ -46,7 +44,7 @@
         <div class="container">
             <div class="row">
                 <!-- Blog entries-->
-                <div class="col-lg-8">
+                <div class="col">
                     <!-- Featured blog post-->
                     <div class="card mb-4">
                         <a href="#!"><img class="card-img-top post" src="{{ url_for('static', filename='images/rbc_brooklyn_half.png') }}" alt="Angie holding her medal after finishing the race" /></a>
@@ -128,8 +126,8 @@
             </div>
         </div>
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+        <footer class="py-3" style="background-color:#655DBB;">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Run With Angie 2023</p></div>
         </footer>
     </main>
     
